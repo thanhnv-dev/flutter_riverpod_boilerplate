@@ -12,7 +12,7 @@ class PostRepositoryImpl implements PostRepository {
     try {
       return await remoteDataSource.getPosts();
     } catch (e) {
-      throw Exception('Repository error: $e');
+      throw e;
     }
   }
 }

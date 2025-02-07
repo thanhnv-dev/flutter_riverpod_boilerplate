@@ -6,7 +6,7 @@ part of 'providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sharedPreferencesHash() => r'7cd30c9640ca952d1bcf1772c709fc45dc47c8b3';
+String _$sharedPreferencesHash() => r'dc403fbb1d968c7d5ab4ae1721a29ffe173701c7';
 
 /// See also [sharedPreferences].
 @ProviderFor(sharedPreferences)
@@ -24,7 +24,7 @@ final sharedPreferencesProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SharedPreferencesRef = AutoDisposeFutureProviderRef<SharedPreferences>;
-String _$networkClientHash() => r'0e62b28fbeefa44c3db353508265549f6b00ae9f';
+String _$networkClientHash() => r'5bb3b286fae7fe32cd210bca64815c5f067f2c99';
 
 /// See also [networkClient].
 @ProviderFor(networkClient)
@@ -42,7 +42,7 @@ final networkClientProvider = AutoDisposeProvider<NetworkClient>.internal(
 // ignore: unused_element
 typedef NetworkClientRef = AutoDisposeProviderRef<NetworkClient>;
 String _$postRemoteDataSourceHash() =>
-    r'c9e63a7b5130a41aaa521e227dc646d36e88f0e8';
+    r'8af7e1d66507417048fe854d78445a7420079744';
 
 /// See also [postRemoteDataSource].
 @ProviderFor(postRemoteDataSource)
@@ -60,7 +60,7 @@ final postRemoteDataSourceProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef PostRemoteDataSourceRef = AutoDisposeProviderRef<PostRemoteDataSource>;
-String _$postRepositoryHash() => r'0565a5dfb471299b4d418b4914194436b2951f89';
+String _$postRepositoryHash() => r'76d1a2dfdb13e1a10fcef0517057ecb62163e926';
 
 /// See also [postRepository].
 @ProviderFor(postRepository)

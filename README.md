@@ -2,41 +2,64 @@
 
 A Flutter boilerplate project that provides a clean, scalable foundation using MVVM (Model-View-ViewModel) architecture pattern and Riverpod for state management.
 
+## Features
+
+- MVVM Architecture
+- Riverpod for State Management
+- Theme Support (Light/Dark)
+- Internationalization (i18n)
+- Auto Route Navigation
+- Network Layer with Dio & Retrofit
+- Local Storage with Shared Preferences
+- Code Generation Support
+- Asset Management
+
 ## Project Structure
 
 ```text
 lib/
-├── core/
-│   ├── di/
-│   │   ├── providers.dart           # Dependency injection providers
-│   │   └── providers.g.dart         # Generated provider code
-│   └── network/
-│       ├── dio_config.dart          # Dio HTTP client configuration
-│       ├── dio_interceptors.dart    # Network interceptors
-│       ├── network_client.dart      # REST API client
-│       └── network_client.g.dart    # Generated API client code
+├── assets/
+│   ├── icons/
+│   │   ├── svg/          # SVG icons
+│   │   └── other/        # Other format icons
+│   └── images/
+│       ├── svg/          # SVG images
+│       └── other/        # Other format images
 │
-└── features/
-    └── home/
-        ├── data/
-        │   ├── datasources/
-        │   │   └── post_remote_data_source.dart    # Remote data source implementation
-        │   └── repositories/
-        │       └── post_repository_impl.dart        # Repository implementation
-        │
-        ├── domain/
-        │   ├── entities/
-        │   │   └── post.dart        # Domain entities
-        │   └── repositories/
-        │       └── post_repository.dart    # Repository interfaces
-        │
-        └── presentation/
-            ├── viewModels/
-            │   ├── home_state.dart         # State management
-            │   ├── home_view_model.dart    # Business logic
-            │   └── home_view_model.g.dart  # Generated ViewModel code
-            └── views/
-                └── home_view.dart          # UI components
+├── core/
+│   ├── common/
+│   │   └── widgets/      # Shared widgets
+│   ├── constants/        # App constants
+│   ├── di/              # Dependency injection
+│   ├── i18n/            # Internationalization
+│   ├── network/         # Network configuration
+│   ├── storage/         # Local storage
+│   ├── theme/           # Theme configuration
+│   └── utils/           # Utility functions
+│
+├── features/
+│   └── home/
+│       ├── data/
+│       │   ├── datasources/
+│       │   │   └── post_remote_data_source.dart
+│       │   └── repositories/
+│       │       └── post_repository_impl.dart
+│       │
+│       ├── domain/
+│       │   ├── entities/
+│       │   │   └── post.dart
+│       │   └── repositories/
+│       │       └── post_repository.dart
+│       │
+│       └── presentation/
+│           ├── viewModels/
+│           │   ├── home_state.dart
+│           │   └── home_view_model.dart
+│           └── views/
+│               └── home_view.dart
+│
+├── routes/              # App navigation
+└── main.dart
 ```
 
 ## Data Flow
@@ -44,15 +67,18 @@ lib/
 ### Request Flow
 
 1. **View Layer (UI)**
+
    - User interactions trigger actions in the View
    - View calls ViewModel methods
 
 2. **ViewModel Layer**
+
    - Handles business logic
    - Updates state using Riverpod
    - Calls repository methods
 
 3. **Repository Layer**
+
    - Coordinates data operations
    - Decides data source (remote/local)
    - Calls appropriate data source
@@ -65,16 +91,19 @@ lib/
 ### Response Flow
 
 1. **Data Source Layer**
+
    - Receives raw API response
    - Handles errors and exceptions
    - Converts response to domain entities
 
 2. **Repository Layer**
+
    - Receives entities from data source
    - Performs any necessary data transformations
    - Forwards data to ViewModel
 
 3. **ViewModel Layer**
+
    - Updates state with new data
    - Handles loading and error states
    - Notifies View of changes
@@ -106,14 +135,50 @@ ViewModel-->>View: Updated State
 View->>View: Rebuild UI
 ```
 
-## Architecture Overview
+## Dependencies
 
-This project follows the MVVM (Model-View-ViewModel) architecture pattern with a clean architecture approach:
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  # State Management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.3.5
+
+  # Navigation
+  auto_route: ^7.8.4
+
+  # Network
+  dio: ^5.4.1
+  retrofit: ^4.1.0
+
+  # Local Storage
+  shared_preferences: ^2.2.2
+
+  # Internationalization
+  easy_localization: ^3.0.5
+
+  # UI
+  google_fonts: ^6.1.0
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  # Code Generation
+  build_runner: ^2.4.8
+  auto_route_generator: ^7.3.2
+  retrofit_generator: ^8.1.0
+  riverpod_generator: ^2.3.5
+```
+
+## Architecture Overview
 
 ### Core Layer
 
 - **DI (Dependency Injection)**: Uses Riverpod for dependency injection and state management
-- **Network**: Handles API communication using Dio with interceptors and REST client
+- **Network**: Handles API communication using Dio with interceptors and Retrofit
+- **Storage**: Manages local storage using SharedPreferences
+- **Theme**: Supports light and dark themes with Material 3
+- **i18n**: Handles internationalization with easy_localization
 
 ### Feature Layer (per feature)
 
@@ -132,52 +197,48 @@ This project follows the MVVM (Model-View-ViewModel) architecture pattern with a
    - **Views**: Contains UI components
    - **States**: Manages UI states
 
-## Key Components
+## Scripts
 
-### Network
+The project includes several utility scripts in the `scripts/` directory:
 
-- Uses Dio for HTTP communications
-- Implements interceptors for logging and error handling
-- Uses Retrofit for type-safe API calls
-
-### State Management
-
-- Uses Riverpod for state management
-- Implements state classes for each feature
-- Uses generated providers for dependency injection
-
-### Error Handling
-
-- Custom exception handling in data sources
-- Error states in ViewModels
-- UI error feedback in Views
-
-## Dependencies
-
-Main dependencies used in this project:
-
-- `flutter_riverpod`: State management and dependency injection
-- `dio`: HTTP client
-- `retrofit`: Type-safe HTTP client
-- `shared_preferences`: Local storage
+- `build_runner.sh`: Runs code generation
+- `i18n_generate_code_loader.sh`: Generates i18n loader code
+- `i18n_generate_locale_keys.sh`: Generates locale keys
+- `generate_assets_constant_file.sh`: Generates asset constants
 
 ## Getting Started
 
 1. Clone the repository
-2. Run `flutter pub get` to install dependencies
-3. Run `flutter pub run build_runner build` to generate code
-4. Run the app using `flutter run`
-
-## Code Generation
-
-This project uses code generation for Riverpod providers and Retrofit client. To generate the required code, run:
 
 ```bash
-flutter pub run build_runner build
+git clone https://github.com/yourusername/flutter_mvvm_riverpod_boilerplate.git
 ```
 
-Or for continuous generation during development:
+2. Install dependencies
 
 ```bash
+flutter pub get
+```
+
+3. Run code generation
+
+```bash
+# For one-time code generation
+flutter pub run build_runner build --delete-conflicting-outputs
+
+# For continuous code generation during development
 flutter pub run build_runner watch
+```
+
+4. Generate i18n files
+
+```bash
+flutter pub run easy_localization:generate -S "lib/core/i18n/langs" -O "lib/core/i18n/generated"
+flutter pub run easy_localization:generate -S "lib/core/i18n/langs" -O "lib/core/i18n/generated" -o "locale_keys.dart" -f keys
+```
+
+5. Generate assets constants
+
+```bash
+sh scripts/generate_assets_constant_file.sh
 ```

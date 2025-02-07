@@ -8,6 +8,10 @@ part 'home_view_model.g.dart';
 class HomeViewModel extends _$HomeViewModel {
   @override
   HomeState build() {
+    Future(() async {
+      await getPosts();
+    });
+
     return HomeState();
   }
 
